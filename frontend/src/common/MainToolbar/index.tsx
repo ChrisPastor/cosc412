@@ -3,6 +3,7 @@ import {Button} from 'primereact/button';
 import {Toolbar} from "primereact/toolbar";
 import {Link} from 'react-router-dom';
 import AuthenticationButton from "../AuthenticationButton";
+import Donation from '../Donation';
 
 const left = () => (
     <React.Fragment>
@@ -15,6 +16,8 @@ const left = () => (
         <Link to="/some-other-page">
             <Button label="Some Other Page" className="p-button-link" />
         </Link>
+        <Donation/>
+
 
     </React.Fragment>
 );
