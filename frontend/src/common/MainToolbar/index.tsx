@@ -3,6 +3,7 @@ import {Button} from 'primereact/button';
 import {Toolbar} from "primereact/toolbar";
 import {Link} from 'react-router-dom';
 import AuthenticationButton from "../AuthenticationButton";
+import UserButton from "../UserButton";
 
 const left = () => (
     <React.Fragment>
@@ -23,7 +24,10 @@ const left = () => (
 );
 
 const right = () => (
-    <AuthenticationButton />
+    <React.Fragment>
+        <AuthenticationButton />
+        <UserButton />
+    </React.Fragment>
 );
 
 const MyToolbar: React.FunctionComponent = () => (
