@@ -15,6 +15,9 @@ const left = () => (
         <Link to="/some-other-page">
             <Button label="Some Other Page" className="p-button-link" />
         </Link>
+        <Link to="/user">
+            <Button label="User" className="p-mr-2" />
+        </Link>
 
     </React.Fragment>
 );
