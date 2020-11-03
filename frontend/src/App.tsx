@@ -8,7 +8,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
 import { useAuth0 } from "@auth0/auth0-react";
-import ProtectedRoute from 'auth/protected-route';
+import ProtectedRoute from './auth/protected-route';
 
 const Loading = () => (
     <div>Loading...</div>
@@ -46,9 +46,7 @@ const App: React.FunctionComponent = (): JSX.Element => {
                 <Route path="/home" >
                     <Home />
                 </Route>
-                <ProtectedRoute path="/some-other-page">
-                    <SomeOtherPage />
-                </ProtectedRoute>
+                <ProtectedRoute path="/some-other-page" component={SomeOtherPage} />
             </Switch>
         </React.Fragment>
     );
