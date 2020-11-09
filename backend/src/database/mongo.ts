@@ -1,14 +1,15 @@
-import {Db, MongoClient, MongoError} from "mongodb";
+import {Db, MongoClient} from "mongodb";
 
 const uri: string = (process.env.DB_URL as string)
 
 //todo: this will need to be updated with more objects and/or types as we know what to pass to it
 export interface MongoCRUDParams {
     collection: string,
-    data: [{ [key: string]: any }] | { [key: string]: any }
+    data: { [key: string]: any }[] | { [key: string]: any }
 }
 
-type MongoCRUDFunction = (err: MongoError, db: Db, otherArgs: MongoCRUDParams) => void
+//todo: figure out the types we need to return other than void
+type MongoCRUDFunction = (db: Db, otherArgs: MongoCRUDParams) => void | Object
 
 export interface MongoConnectionParams {
     callback: MongoCRUDFunction,
@@ -19,6 +20,8 @@ export interface MongoConnectionParams {
 export function mongoConnectWrapper(args: MongoConnectionParams) {
     const {callback, params} = args;
 
+    let result = null;
+
     MongoClient.connect(uri, {useUnifiedTopology: true}, (err, client) => {
         if (err) {
             throw err;
@@ -26,19 +29,17 @@ export function mongoConnectWrapper(args: MongoConnectionParams) {
 
         const db = client.db();
 
-        callback(err, db, params);
+        result = callback(db, params);
 
-        client.close((err) => {
-            console.log(`An error occurred closing the client: ${err}`);
+        client.close((error) => {
+            console.log(`An error occurred closing the client: ${error}`);
         });
     });
+
+    return result;
 }
 
-export const insertOneWrapper: MongoCRUDFunction = (err, db, otherArgs) => {
-    if (err) {
-        throw err;
-    }
-
+export const insertOneWrapper: MongoCRUDFunction = (db, otherArgs) => {
     const {collection, data} = otherArgs;
 
     db.collection(collection).insertOne(data, (error, res) => {
