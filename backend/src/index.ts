@@ -1,13 +1,22 @@
-import express, {Request, Response} from 'express';
+import {AddressInfo} from "net";
+import express, {Request, Response, NextFunction} from 'express';
 import cors from 'cors';
+
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
 
-const PORT = 8000;
-
 app.get('/', (req: Request,res: Response) => res.status(200).send('Express + TypeScript Server'));
 
-app.listen(PORT, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+app.use('/test', (req: Request, res: Response) => {
+    res.status(200).send({test: 'test response'})
 });
+
+app.use('/healthy-competition', require('./api'))
+
+const server = app.listen(process.env.PORT || 3000, () => {
+    console.log(`⚡️[server]: Server is running at http://localhost:${(server.address() as AddressInfo).port}`);
+});
+
+module.exports = app;
