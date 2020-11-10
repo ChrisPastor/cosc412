@@ -27,6 +27,7 @@ export function mongoConnectWrapper(args: MongoConnectionParams) {
 
     let result = null;
 
+    //connects to the database
     MongoClient.connect(uri, {useUnifiedTopology: true}, (err, client) => {
         if (err) {
             throw err;
@@ -34,7 +35,8 @@ export function mongoConnectWrapper(args: MongoConnectionParams) {
 
         const db = client.db();
 
-        result = CRUDFunction(db, params);
+        //calls the CRUD Function from the params object
+        result = CRUDFunction(db, params); //gets the result (if there is one)
 
         client.close((error) => {
             console.log(`An error occurred closing the client: ${error}`);
@@ -47,6 +49,7 @@ export function mongoConnectWrapper(args: MongoConnectionParams) {
 export const insertOneWrapper: MongoCRUDFunction = (db, otherArgs) => {
     const {collection, data} = otherArgs;
 
+    //the shape of the data variable should be an Object
     db.collection(collection).insertOne(data, (error, res) => {
         if (!error) {
             console.log(`Insert Completed successfully: ${res.result.ok}`);
