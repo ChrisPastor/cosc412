@@ -13,7 +13,7 @@ app.use('/test', (req: Request, res: Response) => {
     res.status(200).send({test: 'test response'})
 });
 
-app.use('/healthy-competition', require('./api'))
+app.use('/healthy-competition/api', require('./api'))
 
 const server = app.listen(process.env.PORT || 3000, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${(server.address() as AddressInfo).port}`);

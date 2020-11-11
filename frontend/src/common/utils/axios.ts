@@ -17,7 +17,7 @@ interface RequestParams {
     method: 'GET' | 'POST' | 'PUT', //type of request
     endpoint: string, //the url to request to. This is may include the querystring in get requests
     headers?: {[key: string]: string} //this will be required for authorization of the api if we do that
-    data?: {[key: string]: string} //data to be added in a post or put request
+    data?: {[key: string]: any} //data to be added in a post or put request
 }
 
 const instance: AxiosInstance = axios.create({
@@ -45,7 +45,7 @@ export function httpRequest(args: RequestParams) {
         data: args.data,
     }).then((res) => {
         const {data} = res;
-        return {data};
+        return data;
     }).catch((err) => {
         console.log('an error occurred in the request');
         console.log(err);

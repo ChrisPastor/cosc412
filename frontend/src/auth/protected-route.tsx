@@ -5,13 +5,13 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 interface ProtectedRouteProps {
     component: ComponentType<any>,
-    args: any
+    path: string,
 }
 
 const ProtectedRoute = ({ component, ...args }: ProtectedRouteProps): JSX.Element => (
     <Route
         component={withAuthenticationRequired(component, {
-            onRedirecting: () =><div>loading...</div> // <Loading />,
+            onRedirecting: () =><div>loading...</div>
         })}
         {...args}
     />
