@@ -10,7 +10,7 @@ import 'primeflex/primeflex.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from './auth/protected-route';
 import {httpRequest} from './common/utils/axios';
-import {User} from "../../backend/types/User";
+import {User} from "../../backend/src/types/User";
 
 const Loading = () => (
     <div>Loading...</div>
@@ -67,7 +67,9 @@ const Home = () => {
 };
 
 const Login = () => (
-    <h1>Login</h1>
+    <div>
+        <Leaderboard/>
+    </div>
 );
 
 const App: React.FunctionComponent = (): JSX.Element => {
