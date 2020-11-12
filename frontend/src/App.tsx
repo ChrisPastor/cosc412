@@ -38,7 +38,7 @@ const Home = () => {
         async function fetchData() {
             const {data} = await httpRequest({
                 method: 'POST',
-                endpoint: 'http://localhost:3000/api/users/',
+                endpoint: 'http://localhost:3000/healthy-competition/api/users/',
                 data: {
                     user: fakeUser,
                     type: 'find-one'
