@@ -1,10 +1,7 @@
-import {NextFunction, Request, Response} from "express";
-
 import express from 'express';
+import {userController} from "../controllers/UserController";
 const router = express.Router();
 
-router.get('/database', (req: Request,res: Response, next: NextFunction) => {
-    res.status(200).send({});
-});
+router.get('/users', userController);
 
 module.exports = router;
