@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
 import {Button} from "primereact/button";
 const Donation = (): JSX.Element => {
     return (
@@ -11,5 +11,6 @@ const Donation = (): JSX.Element => {
         </Link>
     );
 };
+
 
 export default Donation;
