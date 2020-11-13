@@ -2,7 +2,7 @@
 interface User {
     id: string,
     userName: string,
-    picture: unknown,
+    picture: string,
     friends: string[],
     games: string[],
     bio: string,
