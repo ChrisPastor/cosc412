@@ -3,14 +3,16 @@ import {Db, FilterQuery, MongoClient} from "mongodb";
 //todo: this will need to be updated with more objects and/or types as we know what to pass to it
 export interface MongoSingleCRUDParams {
     collection: string,
-    data: { [key: string]: any },
+    data: object,
     filter: FilterQuery<any> //if no filter values are needed this can be {}
+    options?: object,
 }
 
 export interface MongoManyCRUDParams {
     collection: string,
-    data: { [key: string]: any }[],
+    data: object[],
     filter: FilterQuery<any> //if no filter values are needed this can be {}
+    options?: object,
 }
 
 //todo: figure out the types we need to return other than void
@@ -35,10 +37,10 @@ export async function mongoConnectWrapper(args: MongoConnectionParams) {
 }
 
 export const insertOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
-    const {collection, data} = otherArgs;
+    const {collection, data, options} = otherArgs;
     try {
         //the shape of the data variable should be an Object
-        const result = await db.collection(collection).insertOne(data);
+        const result = await db.collection(collection).insertOne(data, options);
 
         console.log(`Insert Completed successfully: ${result.result.ok}`);
     } catch (error) {
@@ -47,9 +49,9 @@ export const insertOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
 }
 
 export const deleteOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
-    const {collection, data} = otherArgs;
+    const {collection, filter, options} = otherArgs;
     try {
-        const result = await db.collection(collection).deleteOne(data);
+        const result = await db.collection(collection).deleteOne(filter, options);
 
         console.log(`Delete completed successfully: ${result.result.ok}`);
     } catch (error) {
@@ -58,9 +60,9 @@ export const deleteOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
 }
 
 export const findOneAndUpdateWrapper: MongoCRUDFunction = async (db, otherArgs ) => {
-    const {collection, filter, data} = otherArgs;
+    const {collection, filter, data, options} = otherArgs;
     try {
-        const result = await db.collection(collection).findOneAndUpdate(filter, data);
+        const result = await db.collection(collection).findOneAndUpdate(filter, data, options);
 
         console.log(`update was successful for: ${result.value}`);
     } catch (error) {
@@ -69,11 +71,32 @@ export const findOneAndUpdateWrapper: MongoCRUDFunction = async (db, otherArgs )
 }
 
 export const findOneWrapper: MongoCRUDFunction = async (db,otherArgs) => {
-    const {collection, filter} = otherArgs;
+    const {collection, filter, options} = otherArgs;
 
-    let result: Object[] = [{}];
+    let result: Object[] = [];
     try {
-        const temp = await db.collection(collection).findOne(filter);
+        const temp = await db.collection(collection).findOne(filter, options);
+
+        if (temp) {
+            result = [temp];
+        }
+
+        // console.log(`you've found `)
+        // const util = require('util')
+        // console.log(util.inspect(result, {showHidden: false, depth: null}))
+    } catch (error) {
+        console.log(`error: ${error}`);
+    }
+
+    return result;
+}
+
+export const findWrapper: MongoCRUDFunction = async (db, otherArgs) => {
+    const {collection, filter, options} = otherArgs;
+
+    let result: Object[] = [];
+    try {
+        const temp = await db.collection(collection).find(filter, options).toArray();
 
         if (temp) {
             result = temp;
