@@ -7,8 +7,8 @@
 
 
 import axios, {AxiosInstance} from 'axios';
-import {User} from "../../../../backend/types/User";
-import {Game} from "../../../../backend/types/Game";
+import {User} from "../../../../backend/src/types/User";
+import {Game} from "../../../../backend/src/types/Game";
 
 export type getURLFunction = () => string;
 
