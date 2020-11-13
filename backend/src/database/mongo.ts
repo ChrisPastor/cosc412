@@ -48,6 +48,23 @@ export const insertOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
     }
 }
 
+export const insertManyWrapper: MongoCRUDFunction = async (db, otherArgs) => {
+    const {collection, data, options} = otherArgs;
+    try {
+        if (typeof data !== "object") {
+            //the shape of the data variable should be an array of objects
+            const result = await db.collection(collection).insertMany(data, options);
+
+            console.log(`Insert Completed successfully: ${result.result.ok}`);
+        } else {
+            throw new Error(`Expected array of objects, got ${data}`);
+        }
+    } catch (error) {
+        console.log(`An error occurred: ${error}`);
+
+    }
+}
+
 export const deleteOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
     const {collection, filter, options} = otherArgs;
     try {
@@ -56,6 +73,32 @@ export const deleteOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
         console.log(`Delete completed successfully: ${result.result.ok}`);
     } catch (error) {
         console.log(`an error occurred: ${error}`)
+    }
+}
+
+export const updateOneWrapper: MongoCRUDFunction = async (db, otherArgs ) => {
+    const {collection, filter, data, options} = otherArgs;
+    try {
+        const result = await db.collection(collection).updateOne(filter, data, options);
+
+        console.log(`replacement was successful for: ${result.result.ok}`);
+    } catch (error) {
+        console.log(`there was an error: ${error}`);
+    }
+}
+
+export const updateManyWrapper: MongoCRUDFunction = async (db, otherArgs ) => {
+    const {collection, filter, data, options} = otherArgs;
+    try {
+        if (typeof data !== "object") {
+            const result = await db.collection(collection).updateMany(filter, data, options);
+
+            console.log(`update was successful for: ${result.result.ok}`);
+        } else {
+            throw new Error(`Expected array of objects, got ${data}`);
+        }
+    } catch (error) {
+        console.log(`there was an error: ${error}`);
     }
 }
 
@@ -110,4 +153,15 @@ export const findWrapper: MongoCRUDFunction = async (db, otherArgs) => {
     }
 
     return result;
+}
+
+export const replaceOneWrapper: MongoCRUDFunction = async (db, otherArgs) => {
+    const {collection, filter, data, options} = otherArgs;
+    try {
+        const result = await db.collection(collection).replaceOne(filter, data, options);
+
+        console.log(`Replace completed successfully: ${result.result.ok}`);
+    } catch (error) {
+        console.log(`an error occurred: ${error}`)
+    }
 }
