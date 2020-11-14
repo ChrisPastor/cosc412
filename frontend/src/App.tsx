@@ -11,6 +11,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from './auth/protected-route';
 import {httpRequest} from './common/utils/axios';
 import {User} from "../../backend/src/types/User";
+import Ranking from "~common/Leaderboard/LeaderboardRanking";
+import {Game} from "../../backend/src/types/Game";
 
 const Loading = () => (
     <div>Loading...</div>
@@ -22,11 +24,21 @@ const SomeOtherPage = () => (
 
 const fakeUser: User = {
     bio: "this is a bio",
+    email: "someEmail",
     friends: [],
     games: [],
     id: "agsdfkasdkj",
-    picture: undefined,
+    picture: "",
     userName: "jdsfjdfa"
+};
+
+const fakeGame: Game = {
+    goal: 25,
+    id: "sadkhjfa",
+    metric: "weight",
+    name: "game1",
+    type: 'Solo',
+    users: []
 };
 
 const Home = () => {
@@ -40,7 +52,7 @@ const Home = () => {
                 method: 'POST',
                 endpoint: 'http://localhost:3000/healthy-competition/api/users/',
                 data: {
-                    user: fakeUser,
+                    data: fakeUser,
                     type: 'find-one'
                 }
             });
@@ -68,7 +80,7 @@ const Home = () => {
 
 const Login = () => (
     <div>
-        <Leaderboard/>
+        <Ranking gameUsers={fakeGame.users} metric={fakeGame.metric} />
     </div>
 );
 

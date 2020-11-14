@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 
 interface LeaderboardItemProps {
@@ -8,7 +8,7 @@ interface LeaderboardItemProps {
     metric: string,
 }
 
-const LeaderboardItem = (props: LeaderboardItemProps) => {
+const LeaderboardItem = (props: LeaderboardItemProps): JSX.Element => {
     const {
         userName, 
         value, 
@@ -16,7 +16,7 @@ const LeaderboardItem = (props: LeaderboardItemProps) => {
         metric
     } = props;
 
-    const metricString = `${metric}: ${value}`
+    const metricString = `${metric}: ${value}`;
 
     return (
         <div className="p-d-flex p-ai-start p-mb-2">
@@ -27,10 +27,8 @@ const LeaderboardItem = (props: LeaderboardItemProps) => {
                 <div>{userName}</div>
                 <div>{metricString}</div>
             </div>
-            
         </div>
-        
-    )
-}
+    );
+};
 
 export {LeaderboardItem};
