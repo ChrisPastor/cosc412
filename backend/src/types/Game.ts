@@ -5,7 +5,7 @@ interface UserEntry {
 
 
 interface GameUser {
-    userId: string,
+    id: string,
     values: UserEntry[]
 }
 
