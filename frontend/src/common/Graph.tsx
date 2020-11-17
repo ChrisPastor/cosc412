@@ -30,8 +30,4 @@ const options = {
   }
 };
 
-export default (
-  <div style={{ width: 400 }}>
-    <Chart type='line' data={data} options={options} />
-  </div>
-);
+export default Graph;
