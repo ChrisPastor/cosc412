@@ -30,4 +30,9 @@ const options = {
   }
 };
 
-export default Graph;
+export const ProgressGraph = () => { return (
+  <div style={{ width: 400 }}>
+    <Chart type='line' data={data} options={options} />
+  </div>
+);
+}
