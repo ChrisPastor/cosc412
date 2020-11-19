@@ -6,7 +6,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from './auth/protected-route';
 import {httpRequest} from './common/utils/axios';
@@ -84,6 +84,7 @@ const Login = () => (
     </div>
 );
 
+
 const App: React.FunctionComponent = (): JSX.Element => {
     const { isLoading } = useAuth0();
 
@@ -104,7 +105,10 @@ const App: React.FunctionComponent = (): JSX.Element => {
                 <Route path="/home" >
                     <Home />
                 </Route>
-                <ProtectedRoute path="/some-other-page" component={SomeOtherPage}/>
+                <Route path= "/user"> 
+                    <ProfilePage/>
+                </Route>
+                <ProtectedRoute path="/some-other-page" component={SomeOtherPage} />
             </Switch>
         </React.Fragment>
     );
