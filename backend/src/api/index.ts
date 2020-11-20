@@ -3,7 +3,7 @@ import {userController} from "../controllers/UserController";
 import {gameController} from "../controllers/GameController";
 const router = express.Router();
 
-router.get('/users', userController);
-router.get('/games', gameController);
+router.use('/users', userController);
+router.use('/games', gameController);
 
 module.exports = router;
