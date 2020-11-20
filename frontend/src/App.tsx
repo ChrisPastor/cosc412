@@ -11,8 +11,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from './auth/protected-route';
 import {httpRequest} from './common/utils/axios';
 import {User} from "../../backend/src/types/User";
-import Ranking from "~common/Leaderboard/LeaderboardRanking";
+import Ranking from "./common/Leaderboard/LeaderboardRanking";
 import {Game} from "../../backend/src/types/Game";
+import {observer} from "mobx-react";
 
 const Loading = () => (
     <div>Loading...</div>
@@ -38,10 +39,12 @@ const fakeGame: Game = {
     metric: "weight",
     name: "game1",
     type: 'Solo',
-    users: []
+    users: [],
+    completed: true,
 };
 
-const Home = () => {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+const Home = observer(() => {
     const [testValue, setTestValue] = useState({});
 
     //this useEffect will only happen on the first page load as there are no values it is dependent on
@@ -50,7 +53,7 @@ const Home = () => {
         async function fetchData() {
             const {data} = await httpRequest({
                 method: 'POST',
-                endpoint: 'http://localhost:3000/healthy-competition/api/users/',
+                endpoint: '/api/users/',
                 data: {
                     data: fakeUser,
                     type: 'find-one'
@@ -76,7 +79,7 @@ const Home = () => {
             {testValue && dataOutput(testValue)}
         </div>
     );
-};
+});
 
 const Login = () => (
     <div>
