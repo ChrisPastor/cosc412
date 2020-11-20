@@ -21,6 +21,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "browserslist": [
+    "since 2017-06"
+  ],
   "devDependencies": {
     "@types/auth0": "^2.20.9",
     "@types/chai": "^4.2.14",
