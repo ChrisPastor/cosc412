@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "A website to promote healthy eating and competition among users",
   "scripts": {
-    "start": "cd backend && npm install && npm run build && npm run prod:start",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "prod:frontend": "cd frontend && npm install && npm run build",
+    "prod:backend": "cd backend && npm install && npm run build",
+    "start": "cd backend && npm run prod:start",
+    "heroku-postbuild": "npm run prod:frontend && npm run prod:backend"
   },
   "repository": {
     "type": "git",
