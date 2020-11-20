@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "description": "",
   "main": "src/index.tsx",
+  "targets": {
+    "main": false
+  },
   "scripts": {
-    "prebuild": "run-s clean lint",
-    "build": "parcel build index.html --no-source-maps",
+    "pre-build": "run-s clean lint",
+    "build": "parcel build public/index.html --dist-dir ./dist --public-url ./dist/ --no-source-maps",
     "clean": "rimraf ./dist && rimraf ./.parcel-cache",
     "lint": "run-s lint:code lint:style",
     "lint:code": "eslint --ext ts,tsx src",
     "lint:style": "stylelint src/**/*.scss",
-    "start": "parcel index.html --open",
+    "start": "parcel public/index.html --open",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --collect-coverage"

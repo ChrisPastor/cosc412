@@ -1,0 +1,20 @@
+{
+  "name": "healthy-competition-website",
+  "version": "1.0.0",
+  "description": "A website to promote healthy eating and competition among users",
+  "scripts": {
+    "start": "cd backend && npm run build && npm run prod:start",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisPastor/healthy-competition-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisPastor/healthy-competition-website/issues"
+  },
+  "homepage": "https://github.com/ChrisPastor/healthy-competition-website#readme"
+}

@@ -20,7 +20,7 @@ const Ranking = (props: RankingProps): JSX.Element => {
         async function fetchData() {
             const {data} = await httpRequest({
                 method: 'POST',
-                endpoint: 'http://localhost:3000/healthy-competition/api/users/',
+                endpoint: '/api/users/',
                 data: {
                     user: props.gameUsers,
                     type: 'find-many'

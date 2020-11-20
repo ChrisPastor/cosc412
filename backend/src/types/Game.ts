@@ -6,6 +6,7 @@ interface UserEntry {
 
 interface GameUser {
     id: string,
+    userName: string,
     values: UserEntry[]
 }
 
@@ -16,7 +17,8 @@ interface Game {
     type: 'Solo' | 'Team Multi' | 'Solo Multi',
     metric: string,
     goal: string | number,
-    users: GameUser[]
+    users: GameUser[],
+    completed: boolean
 
 }
 
