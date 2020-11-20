@@ -21,11 +21,10 @@ app.use('/api', require('./api'))
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
-    app.use(express.static(path.join(__dirname, '/../frontend/dist')));
-    console.log(path.join(__dirname, '/../frontend/dist'))
+    app.use(express.static(path.join(__dirname, '..', '..', 'frontend/dist')));
     // Handle React routing, return all requests to React app
     app.get('*', function(req, res) {
-        res.sendFile(path.join(__dirname, '/../frontend/dist', 'index.html'));
+        res.sendFile(path.join(__dirname, '..', '..', 'frontend/dist', 'index.html'));
     });
 }
 
