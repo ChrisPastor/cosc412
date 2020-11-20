@@ -21,15 +21,20 @@ app.use('/api', require('./api'))
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
-    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+    app.use(express.static(path.join(__dirname, '..', 'frontend/dist')));
     // Handle React routing, return all requests to React app
     app.get('*', function(req, res) {
-        res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+        res.sendFile(path.join(__dirname, '..', 'frontend/dist', 'index.html'));
     });
 }
 
 const server = app.listen(process.env.PORT || 3000, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${(server.address() as AddressInfo).port}`);
+    if (process.env.NODE_ENV === 'development') {
+        console.log(`⚡️[server]: Server is running at http://localhost:${(server.address() as AddressInfo).port}`);
+    }
+    else if (process.env.NODE_ENV === 'production') {
+        console.log(`⚡️[server]: Server is running at https://healthy-competition-412.herokuapp.com:${(server.address() as AddressInfo).port}`);
+    }
 });
 
 module.exports = app;
