@@ -1,11 +1,15 @@
 import {AddressInfo} from "net";
 import express, {Request, Response, NextFunction} from 'express';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from "path";
 
 require('dotenv').config();
 
 const app = express();
+
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 if (process.env.NODE_ENV === 'development') {
     app.use(cors());
