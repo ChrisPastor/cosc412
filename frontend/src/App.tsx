@@ -9,19 +9,12 @@ import 'primeflex/primeflex.css';
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from './auth/protected-route';
-import {httpRequest} from './common/utils/axios';
 import {User} from "../../backend/src/types/User";
-import Ranking from "./common/Leaderboard/LeaderboardRanking";
 import {Game} from "../../backend/src/types/Game";
 import {observer} from "mobx-react";
-
-const Loading = () => (
-    <div>Loading...</div>
-);
-
-const SomeOtherPage = () => (
-    <h2>Some Other Page</h2>
-);
+import {ProgressSpinner} from "primereact/progressspinner";
+import HomePage from './pages/HomePage/HomePage';
+import Donation from "./common/Donation";
 
 const fakeUser: User = {
     bio: "this is a bio",
@@ -43,56 +36,11 @@ const fakeGame: Game = {
     completed: true,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-const Home = observer(() => {
-    const [testValue, setTestValue] = useState({});
-
-    //this useEffect will only happen on the first page load as there are no values it is dependent on
-    useEffect(() => {
-        //we have to wrap our async request in a synchronous method call bc useEffect is synchronous
-        async function fetchData() {
-            const {data} = await httpRequest({
-                method: 'POST',
-                endpoint: '/api/users/',
-                data: {
-                    data: fakeUser,
-                    type: 'find-one'
-                }
-            });
-
-            console.log(data);
-
-            setTestValue(data);
-        }
-        void fetchData();
-    }, []);
-
-    const dataOutput = (data: { [key: string]: any }) => {
-        return Object.keys(data).map((value, index) => {
-            return <div key={`key${index}`}>{value}: {data[value]}</div>;
-        });
-    };
-
-    return (
-        <div>
-            <h1>HomePage</h1>
-            {testValue && dataOutput(testValue)}
-        </div>
-    );
-});
-
-const Login = () => (
-    <div>
-        <Ranking gameUsers={fakeGame.users} metric={fakeGame.metric} />
-    </div>
-);
-
-
-const App: React.FunctionComponent = (): JSX.Element => {
+const App: React.FunctionComponent = observer((): JSX.Element => {
     const { isLoading } = useAuth0();
 
     if(isLoading) {
-        return <Loading />;
+        return <ProgressSpinner />;
     }
 
     return (
@@ -100,21 +48,21 @@ const App: React.FunctionComponent = (): JSX.Element => {
             <MyToolbar />
             <Switch>
                 <Route exact path="/" >
-                    <Home />
-                </Route>
-                <Route path="/login">
-                    <Login />
+                    <HomePage />
                 </Route>
                 <Route path="/home" >
-                    <Home />
+                    <HomePage />
                 </Route>
-                <Route path= "/user"> 
-                    <ProfilePage/>
+                <Route path="/donate" >
+                    <Donation />
                 </Route>
-                <ProtectedRoute path="/some-other-page" component={SomeOtherPage} />
+                <ProtectedRoute path={`/game/team-multi/:id`} component={() => <div>I exist</div>} />
+                <ProtectedRoute path={`/game/solo-multi/:id`} component={() => <div>I exist</div>} />
+                <ProtectedRoute path={`/game/solo/:id`} component={() => <div>I exist</div>} />
+                <ProtectedRoute path={`/user/:id`} component={ProfilePage}/>
             </Switch>
         </React.Fragment>
     );
-};
+});
 
 export default App;

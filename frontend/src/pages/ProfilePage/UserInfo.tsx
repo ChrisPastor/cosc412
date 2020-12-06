@@ -1,23 +1,20 @@
 import React from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
+import {User} from "../../../../backend/src/types/User";
+import {observer} from "mobx-react";
 
+interface userInfoProps {
+    user: User
+}
 
-const UserInfo =() => {
-    
-    const {user} = useAuth0();
-    console.log(user);
-
+const UserInfo = observer(({user}: userInfoProps) => {
 
     return(
         <div>
-            <img style ={{width:"160px", height: "160px", borderRadius: "80px"}} 
-            src="userimagelinkgoeshere"
-            />
-            <h4>First Name Last Name here</h4>
+            <img style ={{width:"160px", height: "160px", borderRadius: "80px"}} src={user.picture}/>
+            <h4>{user.userName}</h4>
+            <p>Bio: {user.bio}</p>
         </div>
-
-    )
-
-}
+    );
+});
 
 export {UserInfo};

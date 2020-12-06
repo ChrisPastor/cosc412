@@ -1,24 +1,22 @@
 import React from "react";
-import {BrowserRouter, Link, Switch} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Button} from "primereact/button";
-import user from "../pages/ProfilePage/ProfilePage";
+import {observer} from "mobx-react";
+import {currentUserStore} from "../stores";
 
+const UserButton = observer((): JSX.Element => {
+    const {user} = currentUserStore;
 
-const UserButton = (): JSX.Element => {
     return (
-        <Link to="/user">
+        <Link to={`/user/${encodeURIComponent(user.userName)}`}>
             <Button
-                label="User"
                 className="p-mr-2"
-                />
-                
+                icon="pi pi-user"
+                label="User"
+            />
         </Link>
-        
     );
     
-};
- 
-
-
+});
 
 export default UserButton;

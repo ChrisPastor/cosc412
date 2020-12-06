@@ -1,7 +1,7 @@
 import React, { ComponentType } from "react";
 import { Route } from "react-router-dom";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-//import { Loading } from "../components/index";
+import {ProgressSpinner} from "primereact/progressspinner";
 
 interface ProtectedRouteProps {
     component: ComponentType<any>,
@@ -11,7 +11,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ component, ...args }: ProtectedRouteProps): JSX.Element => (
     <Route
         component={withAuthenticationRequired(component, {
-            onRedirecting: () =><div>loading...</div>
+            onRedirecting: () =><ProgressSpinner />
         })}
         {...args}
     />
