@@ -1,6 +1,6 @@
 interface UserEntry {
     value: string | number,
-    date: Date
+    date: string, //date
 }
 
 
