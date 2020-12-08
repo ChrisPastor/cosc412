@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { httpRequest } from '../utils/axios';
+import * as axios from '../utils/axios';
 import {Game, GameUser} from '../../../../backend/src/types/Game';
 import { LeaderboardItem } from './LeaderboardItem';
 import { User } from '../../../../backend/src/types/User';
@@ -18,7 +18,7 @@ const Ranking = (props: RankingProps): JSX.Element => {
     useEffect(() => {
         //we have to wrap our async request in a synchronous method call bc useEffect is synchronous
         async function fetchData() {
-            const {data} = await httpRequest({
+            const {data} = await axios.httpRequest({
                 method: 'POST',
                 endpoint: '/api/users/',
                 data: {
@@ -33,6 +33,8 @@ const Ranking = (props: RankingProps): JSX.Element => {
         }
         void fetchData();
     }, []);
+
+console.log(ranking);
 
     return (
         <div className="p-d-flex p-flex-column">

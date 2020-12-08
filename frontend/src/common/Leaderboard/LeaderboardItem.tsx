@@ -16,7 +16,7 @@ const LeaderboardItem = (props: LeaderboardItemProps): JSX.Element => {
         metric
     } = props;
 
-    const metricString = `${metric}: ${value}`;
+    const metricString = `${metric}: ${typeof value === 'number' ? value.toFixed(2) : value}`;
 
     return (
         <div className="p-d-flex p-ai-start p-mb-2">
