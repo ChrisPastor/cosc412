@@ -20,5 +20,5 @@ module.exports = {
     snapshotSerializers: [
         'enzyme-to-json/serializer' //we only need this if we are going to use snapshots
     ],
-    testEnvironment: 'node',
+    //testEnvironment: 'node',
 };
