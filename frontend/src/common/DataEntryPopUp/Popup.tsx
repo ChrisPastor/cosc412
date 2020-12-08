@@ -9,7 +9,7 @@ interface PopUpProps {
     metric: string,
 }
 
-const PopUp = (props: PopUpProps)=> {
+export const PopUp = (props: PopUpProps): JSX.Element => {
     const {
         handleClose,
         show,
@@ -40,6 +40,6 @@ const PopUp = (props: PopUpProps)=> {
                 <Button className="p-mr-2" label="submit" onClick={addMetric}/>
             </div>
         </div>
-    )
+    );
 };
 
