@@ -57,6 +57,20 @@ export async function gameController(req: Request, res: Response, next: NextFunc
                 upsert: true //create a document if no documents matched the search
             }
         }
+    } else if (type === 'find-many') {
+        f = findWrapper;
+        params = {
+            ...params,
+            filter: {
+                id: {
+                    $in: data //this is an array of strings of game ids
+                }
+            },
+            options: {
+                '_id': 0
+            }
+        }
+
     } else {
         res.sendStatus(400);
         throw new Error('Invalid type in request');

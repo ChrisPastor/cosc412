@@ -4,6 +4,7 @@ import {User} from '../../../../backend/src/types/User';
 import {Participant} from "./Participant";
 import './GameParticipants.scss';
 
+//todo: turn this into a proper use of props
 const GameParticipants = (props: Array<User>) => {
 
 
