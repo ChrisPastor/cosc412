@@ -18,6 +18,6 @@ const Participant = (props: User) => {
             </div>
         </Link>
     );
-}
+};
 
-export {Participant}
+export {Participant};

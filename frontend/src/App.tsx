@@ -31,7 +31,7 @@ const fakeGame: Game = {
     id: "sadkhjfa",
     metric: "weight",
     name: "game1",
-    type: 'Solo',
+    type: 'solo',
     users: [],
     completed: true,
 };

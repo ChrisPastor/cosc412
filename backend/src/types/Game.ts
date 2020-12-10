@@ -14,7 +14,7 @@ interface GameUser {
 interface Game {
     id: string,
     name: string,
-    type: 'Solo' | 'Team Multi' | 'Solo Multi',
+    type: 'solo' | 'team-multi' | 'solo-multi',
     metric: string,
     goal: string | number,
     users: GameUser[],
