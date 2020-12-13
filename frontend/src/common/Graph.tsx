@@ -22,17 +22,20 @@ const data = {
 const options = {
     title: {
         display: true,
-        text: 'Team Progress',
+        text: 'Your Progress',
         fontSize: 16
     },
     legend: {
         position: 'bottom'
-    }
+    },
+    responsive: true
 };
 
-export const ProgressGraph = () => { return (
-    <div style={{ width: 400 }}>
+export const ProgressGraph = (props) => { 
+    const {width, height} = props
+    return (
+        <div style={{width: "100%", height: "100%"}}>
         <Chart type='line' data={data} options={options} />
-    </div>
-);
+        </div>
+    );
 }
