@@ -5,25 +5,23 @@ import {User} from "../../../../backend/src/types/User";
 import {Game} from "../../../../backend/src/types/Game";
 
 export function findOrCreateUserWrapper({isAuthenticated, user}: {isAuthenticated: boolean, user: any}) {
-    if (Object.keys(currentUserStore.user).length === 0) {
-        if (isAuthenticated) {
-            currentUserStore._isLoading = true;
+    if (isAuthenticated) {
+        currentUserStore._isLoading = true;
 
-            const currentUser: User = {
-                bio: "",
-                email: user.email,
-                friends: [],
-                games: [],
-                id: user.sub,
-                picture: user.picture,
-                userName: user.name
-            };
+        const currentUser: User = {
+            bio: "",
+            email: user.email,
+            friends: [],
+            games: [],
+            id: user.sub,
+            picture: user.picture,
+            userName: user.name
+        };
 
-            currentUserStore.user = currentUser;
+        currentUserStore.user = currentUser;
 
-            //we have to wrap our async request in a synchronous method call bc useEffect is synchronous
-            void findOrCreateUser();
-        }
+        //we have to wrap our async request in a synchronous method call bc useEffect is synchronous
+        void findOrCreateUser();
     }
 }
 
