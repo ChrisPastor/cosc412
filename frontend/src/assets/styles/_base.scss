@@ -5,3 +5,8 @@
   top: 0;
   width: 100%;
 }
+
+@mixin font {
+  font-family: sans-serif;
+  font-size: 16pt;
+}

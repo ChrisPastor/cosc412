@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {UserInfo} from './UserInfo';
 import {observer} from "mobx-react";
-import {currentUserStore} from "../../stores";
+import {currentUserStore, gameStore} from "../../stores";
 import {ProgressSpinner} from "primereact/progressspinner";
 import {findOrCreateUserWrapper, getAllGamesWrapper} from "../../common/utils/requests";
 import {useAuth0} from "@auth0/auth0-react";
 import {PopUp} from "../../common/DataEntryPopUp/Popup";
 import { Button } from 'primereact/button';
-import {Game} from "../../../../backend/src/types/Game";
+import {Game, GameUser} from "../../../../backend/src/types/Game";
 import {GamesList} from "./GamesList";
+import {NewGamePopUp} from "../../common/NewGamePopUp";
+import {httpRequest} from "../../common/utils/axios";
 
 const fakeGames: Array<Game> = [
     {
@@ -62,21 +64,34 @@ const fakeGames: Array<Game> = [
 const ProfilePage = observer((): JSX.Element => {
     const {isAuthenticated, user} = useAuth0();
 
-    const [showPopUp, setShowPopUp] = useState<boolean>(false);
-    const [games, setGames] = useState<Array<Game>>(fakeGames);
-
-    const showModal = () => {
-        setShowPopUp(true);
-    };
-    
-    const hideModal = () => {
-        setShowPopUp(false);
-    };
+    const [showNewGamePopUp, setShowNewGamePopUp] = useState<boolean>(false);
+    const [showAddMetricPopUp, setShowAddMetricPopUp] = useState<boolean>(false);
+    const [allUsers, setAllUsers] = useState<Array<GameUser>>([]);
+    const [games, setGames] = useState<Array<Game>>([]);
 
     //this useEffect will only happen on the first page load as there are no values it is dependent on
     useEffect(() => {
         findOrCreateUserWrapper({isAuthenticated, user});
-        //getAllGamesWrapper(setGames);
+        getAllGamesWrapper(setGames);
+        async function getAllUsers() {
+            const response = await httpRequest({
+                method: "POST",
+                endpoint: "/users",
+                data: {
+                    type: 'find-many'
+                }
+            });
+
+            setAllUsers(response.data.map((user) => {
+                return {
+                    id: user.id,
+                    userName: user.userName,
+                    values: []
+                };
+            }));
+
+        }
+        void getAllUsers();
     }, []);
 
     if (currentUserStore._isLoading || !games) {
@@ -84,21 +99,23 @@ const ProfilePage = observer((): JSX.Element => {
     }
 
     return (
-        <div className={'p-d-flex'}>
-            <div>
-                <div style={{
-                    margin: "18px 0px"
-                }}>
-                    <div>
-                        <UserInfo user={currentUserStore.user}/>
+        <>
+            <div className={'p-d-flex'}>
+                <div className="p-mr-5">
+                    <div style={{
+                        margin: "18px 0px"
+                    }}>
+                        <div>
+                            <UserInfo user={currentUserStore.user}/>
+                        </div>
                     </div>
+                    <Button className="p-mr-2" label="Create Game" onClick={() => setShowNewGamePopUp(true)}/>
                 </div>
-                <Button className="p-mr-2" label="add weight" onClick={showModal}/>
-                <PopUp show={showPopUp} handleClose={hideModal} metric="weight"/>
-                {/*the weight metric will come from the game object*/}
+                <GamesList games={games} handleAddMetric={setShowAddMetricPopUp}/>
             </div>
-            <GamesList games={games} />
-        </div>
+            <PopUp show={showAddMetricPopUp} handleClose={() => setShowAddMetricPopUp(false)} metric={"Weight"}/>
+            <NewGamePopUp handleClose={() => setShowNewGamePopUp(false)} show={showNewGamePopUp} allUsers={allUsers} />
+        </>
     );
 });
 

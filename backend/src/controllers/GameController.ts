@@ -41,6 +41,9 @@ export async function gameController(req: Request, res: Response, next: NextFunc
             data: {},
             filter: {
                 id: data.id
+            },
+            options: {
+                '_id': 0
             }
         }
     } else if (type === 'update-one') {
@@ -54,7 +57,7 @@ export async function gameController(req: Request, res: Response, next: NextFunc
                 id: data.id
             },
             options: {
-                upsert: true //create a document if no documents matched the search
+                upsert: true //create a document if no documents matched the search,
             }
         }
     } else if (type === 'find-many') {
