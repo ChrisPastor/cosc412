@@ -15,6 +15,7 @@ import {observer} from "mobx-react";
 import {ProgressSpinner} from "primereact/progressspinner";
 import HomePage from './pages/HomePage/HomePage';
 import Donation from "./common/Donation";
+import SoloGamePage from "./pages/SoloGamePage/SoloGamePage";
 
 const fakeUser: User = {
     bio: "this is a bio",
@@ -58,7 +59,7 @@ const App: React.FunctionComponent = observer((): JSX.Element => {
                 </Route>
                 <ProtectedRoute path={`/game/team-multi/:id`} component={() => <div>I exist</div>} />
                 <ProtectedRoute path={`/game/solo-multi/:id`} component={() => <div>I exist</div>} />
-                <ProtectedRoute path={`/game/solo/:id`} component={() => <div>I exist</div>} />
+                <ProtectedRoute path={`/game/solo/:id`} component={SoloGamePage} />
                 <ProtectedRoute path={`/user/:id`} component={ProfilePage}/>
             </Switch>
         </React.Fragment>
