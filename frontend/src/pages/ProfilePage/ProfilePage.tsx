@@ -72,7 +72,6 @@ const ProfilePage = observer((): JSX.Element => {
     //this useEffect will only happen on the first page load as there are no values it is dependent on
     useEffect(() => {
         findOrCreateUserWrapper({isAuthenticated, user});
-        getAllGamesWrapper(setGames);
         async function getAllUsers() {
             const response = await httpRequest({
                 method: "POST",
@@ -93,6 +92,10 @@ const ProfilePage = observer((): JSX.Element => {
         }
         void getAllUsers();
     }, []);
+
+    useEffect(() => {
+        getAllGamesWrapper(setGames);
+    }, [currentUserStore.user.games]);
 
     if (currentUserStore._isLoading || !games) {
         return <ProgressSpinner />;
