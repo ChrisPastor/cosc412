@@ -72,7 +72,7 @@ export const NewGamePopUp = observer((props: NewGamePopUpProps): JSX.Element => 
                 //insert it into the backend
                 const response = await httpRequest({
                     method: "POST",
-                    endpoint: "/games",
+                    endpoint: "/api/games",
                     data: {
                         data: newGame,
                         type: 'insert-one'
@@ -84,7 +84,7 @@ export const NewGamePopUp = observer((props: NewGamePopUpProps): JSX.Element => 
                 //add the game id to all the users in the game
                 const response2 = await httpRequest({
                     method: "POST",
-                    endpoint: "/users",
+                    endpoint: "/api/users",
                     data: {
                         data: newGame,
                         type: 'update-many'

@@ -76,7 +76,7 @@ const ProfilePage = observer((): JSX.Element => {
         async function getAllUsers() {
             const response = await httpRequest({
                 method: "POST",
-                endpoint: "/users",
+                endpoint: "/api/users",
                 data: {
                     type: 'find-many'
                 }
