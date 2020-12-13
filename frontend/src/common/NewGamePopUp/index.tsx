@@ -86,7 +86,8 @@ export const NewGamePopUp = observer((props: NewGamePopUpProps): JSX.Element => 
                     method: "POST",
                     endpoint: "/api/users",
                     data: {
-                        data: newGame,
+                        data: newGame.users,
+                        game: newGame.id,
                         type: 'update-many'
                     }
                 });
