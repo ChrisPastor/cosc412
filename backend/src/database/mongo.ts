@@ -90,13 +90,9 @@ export const updateOneWrapper: MongoCRUDFunction = async (db, otherArgs ) => {
 export const updateManyWrapper: MongoCRUDFunction = async (db, otherArgs ) => {
     const {collection, filter, data, options} = otherArgs;
     try {
-        if (typeof data !== "object") {
-            const result = await db.collection(collection).updateMany(filter, data, options);
+        const result = await db.collection(collection).updateMany(filter, data, options);
 
-            console.log(`update was successful for: ${result.result.ok}`);
-        } else {
-            throw new Error(`Expected array of objects, got ${data}`);
-        }
+        console.log(`update was successful for: ${result.result.ok}`);
     } catch (error) {
         console.log(`there was an error: ${error}`);
     }
