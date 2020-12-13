@@ -41,11 +41,23 @@ export async function userController(req: Request, res: Response, next: NextFunc
             data: {},
             filter: {
                 id: data.id
+            },
+            options: {
+                '_id': 0
             }
         }
     } else if (type === 'find-many') {
-        //For this if we are expecting an array of GameUsers from the frontend
-        if (!isGameUserArray(data)) {
+        if (!data) {
+            f = findWrapper;
+            params = {
+                ...params,
+                data: {},
+                filter: {},
+                options: {
+                    '_id': 0
+                }
+            }
+        } else if (!isGameUserArray(data)) { //For this if we are expecting an array of GameUsers from the frontend
             throw new Error('Invalid data in request, Expected GameUser[]')
         } else {
             const _data = data.map((item) => item.id);
@@ -55,6 +67,9 @@ export async function userController(req: Request, res: Response, next: NextFunc
                 data: {},
                 filter: {
                     id: {$in: _data}
+                },
+                options: {
+                    '_id': 0
                 }
             }
         }
