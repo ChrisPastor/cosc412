@@ -39,8 +39,28 @@ const HomePage = observer(() => {
     }, []);
 
     return (
-        <div>
-            <h1>HomePage</h1>
+        <div className={"p-m-4 p-flex-column"}>
+            <h1>GET FIT TOGETHER</h1>
+            <div>
+                Welcome to our website used to track health <br/> measures in a fun competitive way!
+            </div>
+            <div>
+                <img alt={"placeholder"}/>
+            </div>
+            <div className={"p-d-flex"}>
+                <div>
+                    <div>Solo Game</div>
+                    <div>description</div>
+                </div>
+                <div>
+                    <div>Solo Multi</div>
+                    <div>description</div>
+                </div>
+                <div>
+                    <div>Team Multi</div>
+                    <div>description</div>
+                </div>
+            </div>
         </div>
     );
 });
