@@ -10,9 +10,6 @@ const left = () => (
         <Link to="/home">
             <Button label="Home" className="p-mr-2" />
         </Link>
-        <Link to="/game/solo/TestGame1">
-            <Button label="Solo Play" className="p-mr-2" />
-        </Link>
         <Donation/>
     </React.Fragment>
 );
