@@ -5,6 +5,7 @@ import {currentUserStore} from "../../stores";
 import { useAuth0 } from "@auth0/auth0-react";
 import {User} from "../../../../backend/src/types/User";
 import {findOrCreateUserWrapper} from "../../common/utils/requests";
+import "./HomePage.scss";
 
 const auth0GoogleUserExampleStructure = {
     given_name:"Christopher",
@@ -39,26 +40,28 @@ const HomePage = observer(() => {
     }, []);
 
     return (
-        <div className={"p-m-4 p-flex-column"}>
+        <div className={"p-m-4 p-flex-column center-text"}>
+            <div className="heading-color">
             <h1>GET FIT TOGETHER</h1>
-            <div>
-                Welcome to our website used to track health <br/> measures in a fun competitive way!
+            </div>
+            <div className="center-text">
+                Welcome to our website used to track health <br/> measures in a fun, competitive way!
             </div>
             <div>
-                <img alt={"placeholder"}/>
+                <img height="400px" width="1000px" className="center" src={"https://images.unsplash.com/photo-1554284126-aa88f22d8b74?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1457&q=80"}/>
             </div>
             <div className={"p-d-flex"}>
-                <div>
-                    <div>Solo Game</div>
-                    <div>description</div>
+                <div className="text-block">
+                    <h3>Solo Game</h3>
+                    <div>Set personal fitness goals using Solo Play! Track your own progress by logging your health metrics over time.</div>
                 </div>
-                <div>
-                    <div>Solo Multi</div>
-                    <div>description</div>
+                <div className="text-block">
+                    <h3>Solo Multiplayer</h3>
+                    <div>COMING SOON. Play against other users online by setting a group fitness goal. Users with the most progress will be displayed on the leaderboard. Make friends and get fit together!</div>
                 </div>
-                <div>
-                    <div>Team Multi</div>
-                    <div>description</div>
+                <div className="text-block">
+                    <h3>Team Multiplayer</h3>
+                    <div>COMING SOON. Create teams of friends and compete against one another to reach a team fitness goal. Team members with the most progress will be shown on the team leaderboard. Track your progress as compared to other team members on the team graph, and be the first to reach your group goal!</div>
                 </div>
             </div>
         </div>
