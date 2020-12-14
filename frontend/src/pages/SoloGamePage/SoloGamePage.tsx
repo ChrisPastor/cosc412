@@ -11,7 +11,6 @@ import {ProgressGraph} from "../../common/Graph";
 import UserStats from "../../common/UserStats";
 import {UserInfo} from "../ProfilePage/UserInfo";
 
-
 const SoloGamePage = observer((): JSX.Element => {
     const {isAuthenticated, user} = useAuth0();
 
@@ -24,7 +23,7 @@ const SoloGamePage = observer((): JSX.Element => {
         goal: 130,
         users: [
             {
-                id: 'someUserId1',
+                id: '"google-oauth2|106012117222739627551"',
                 userName: 'someUserName1',
                 values: [
                     {
@@ -53,25 +52,41 @@ const SoloGamePage = observer((): JSX.Element => {
     // if (currentUserStore._isLoading) {
     //     return <ProgressSpinner />;
     // }
+    // function getUserValues() {
+    //     return gameStore.game.users.find(user => {
+    //         return user.id === currentUserStore.user.id;
+    //     })?.values;
+    // }
+    // const currentUserValues = getUserValues();
 
     return (
         <>
-            <div className={'p-flex-column p-ai-center'} style={{height: "100%"}}>      
+            <div className={'p-m-6 p-flex-column p-ai-center'} style={{textAlign: "center"}}>      
                 <div>
                     <h1>Solo Play</h1>
                 </div>
-                <div className="" style={{width:"700px", height:"15%"}}>
-                    <UserStats />
+                <div className="p-mb-4" style={{width:"700px", height:"15%"}}>
+                    <UserStats 
+                    
+                        // goal={gameStore.game.goal}  
+                        // starting={currentUserValues ? currentUserValues[0].value : 0} 
+                        // current={currentUserValues ? currentUserValues[currentUserValues.length - 1].value : 0}
+                        goal = {12} 
+                        starting = {100}
+                        current = {90}
+
+                    />
                 </div>
-                <Button className="m-r-6" label="add weight" onClick={showModal} style={{}}/>   
-                <div className="p-m-md-6 p-d-flex" style={{
-                    margin: "18px 0px", height:"80%"
-                }}>                        
+             <div style ={{textAlign: "right", paddingRight: "400px",}}>
+                    
+                    <Button className="m-r-6" label="add weight" onClick={showModal} style={{}}/>   
+                    
+                    </div>              
                     {/*the weight metric will come from the game object*/}
                     <div style={{height:"100%", width: "50%", textAlign: "center"}}>
                         <ProgressGraph />
                     </div>
-                </div>
+                
              
             </div>
             <PopUp show={showPopUp} handleClose={hideModal} metric="weight"/>
@@ -80,3 +95,4 @@ const SoloGamePage = observer((): JSX.Element => {
 });
 
 export default SoloGamePage;
+

@@ -1,5 +1,5 @@
 interface UserEntry {
-    value: string | number,
+    value: number,
     date: string, //date
 }
 
@@ -16,7 +16,7 @@ interface Game {
     name: string,
     type: 'solo' | 'team-multi' | 'solo-multi',
     metric: string,
-    goal: string | number,
+    goal: number,
     users: GameUser[],
     completed: boolean
 
