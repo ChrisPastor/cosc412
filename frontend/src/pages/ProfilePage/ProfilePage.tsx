@@ -12,55 +12,6 @@ import {GamesList} from "./GamesList";
 import {NewGamePopUp} from "../../common/NewGamePopUp";
 import {httpRequest} from "../../common/utils/axios";
 
-const fakeGames: Array<Game> = [
-    {
-        id: 'someGameId1',
-        name: 'someGameName1',
-        type: 'solo-multi',
-        metric: 'weight',
-        goal: 30,
-        users: [
-            {
-                id: 'someUserId1',
-                userName: 'someUserName1',
-                values: []
-            }
-        ],
-        completed: false
-    },
-    {
-        id: 'someGameId2',
-        name: 'someGameName2',
-        type: 'solo',
-        metric: 'weight',
-        goal: 30,
-        users: [
-            {
-                id: 'someUserId1',
-                userName: 'someUserName1',
-                values: []
-            }
-        ],
-        completed: false
-    },
-    {
-        id: 'someGameId3',
-        name: 'someGameName3',
-        type: 'team-multi',
-        metric: 'weight',
-        goal: 30,
-        users: [
-            {
-                id: 'someUserId1',
-                userName: 'someUserName1',
-                values: []
-            }
-        ],
-        completed: false
-    },
-];
-
-
 const ProfilePage = observer((): JSX.Element => {
     const {isAuthenticated, user} = useAuth0();
 
@@ -116,7 +67,7 @@ const ProfilePage = observer((): JSX.Element => {
                 </div>
                 <GamesList games={games} handleAddMetric={setShowAddMetricPopUp}/>
             </div>
-            <PopUp show={showAddMetricPopUp} handleClose={() => setShowAddMetricPopUp(false)} metric={"Weight"}/>
+            {/*<PopUp show={showAddMetricPopUp} handleClose={() => setShowAddMetricPopUp(false)} metric={"Weight"}/>*/}
             <NewGamePopUp handleClose={() => setShowNewGamePopUp(false)} show={showNewGamePopUp} allUsers={allUsers} />
         </>
     );

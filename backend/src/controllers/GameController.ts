@@ -16,7 +16,8 @@ import {
 export async function gameController(req: Request, res: Response, next: NextFunction) {
     const {
         data,
-        type
+        type,
+        user
     } = req.body;
 
 
@@ -47,17 +48,18 @@ export async function gameController(req: Request, res: Response, next: NextFunc
             }
         }
     } else if (type === 'update-one') {
+        //we use this to update the userEntries for a user
         f = updateOneWrapper;
         params = {
             ...params,
             data: {
-                $set: data
+                $push: {
+                    'users.$.values': data.newEntry
+                }
             },
             filter: {
-                id: data.id
-            },
-            options: {
-                upsert: true //create a document if no documents matched the search,
+                id: data.id,
+                'users.id': user
             }
         }
     } else if (type === 'find-many') {

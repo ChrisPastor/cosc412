@@ -10,6 +10,7 @@ import {observer} from "mobx-react";
 import {v4 as uuidv4} from 'uuid';
 import {httpRequest} from "../../common/utils/axios";
 import {useHistory} from "react-router-dom";
+import {longEnUSFormatter} from "../../common/utils/helpers";
 
 interface NewGamePopUpProps {
     handleClose: ()=> void,
@@ -60,10 +61,12 @@ export const NewGamePopUp = observer((props: NewGamePopUpProps): JSX.Element => 
             //create a new game object
             const newGame: Game = {
                 completed: false,
+                dateStarted: longEnUSFormatter.format(new Date()),
                 goal: goal,
                 id: uuidv4(),
                 metric: metric,
                 name: gameName,
+                timePeriod: '1 week',
                 type: gameType,
                 users: users
             };
@@ -94,12 +97,12 @@ export const NewGamePopUp = observer((props: NewGamePopUpProps): JSX.Element => 
 
                 const value2 = response2.data;
 
-                document.getElementById('response').innerText = 'Game successfully created. Please wait to be redirected to the game page in 5s';
+                document.getElementById('newGameResponse').innerText = 'Game successfully created. Please wait to be redirected to the game page in 5s';
 
-                // setTimeout(() => history.push(`/game/${gameType}/${newGame.id}`), 5000);
+                setTimeout(() => history.push(`/game/${gameType}/${newGame.id}`), 5000);
 
             } catch (e) {
-                document.getElementById('response').innerText = 'Failed to Create Game';
+                document.getElementById('newGameResponse').innerText = 'Failed to Create Game';
             }
 
         } else {
@@ -173,7 +176,7 @@ export const NewGamePopUp = observer((props: NewGamePopUpProps): JSX.Element => 
                         />
                     </div><br/>
                     <Button className="p-mr-2" label="Create New Game" onClick={createNewGame}/><br/>
-                    <p id="response"></p>
+                    <p id="newGameResponse"></p>
                 </div>
             </div>
         </div>

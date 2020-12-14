@@ -17,6 +17,8 @@ interface Game {
     type: 'solo' | 'team-multi' | 'solo-multi',
     metric: string,
     goal: number,
+    dateStarted: string,
+    timePeriod: string,
     users: GameUser[],
     completed: boolean
 

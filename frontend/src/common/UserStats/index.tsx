@@ -1,43 +1,38 @@
 import React from 'react';
+
 interface UserStatsProps {
         goal: number,
-        starting: number,
-        current: number
+        starting: number | undefined,
+        current: number | undefined
 }
 
 const UserStats = (props : UserStatsProps): JSX.Element => {
-const {goal, starting, current} = props
-
+    const {goal, starting, current} = props;
 
     return (
-        <div style={{display:"flex",justifyContent: "space-between", width: "110%"}}>
-            <div >
+        <div className="p-mb-4 p-d-flex p-jc-center">
+            <div className='p-mr-4 p-ml-4' style={{textAlign: "center"}}>
                 <h5>Goal Weight</h5> 
                 <div>{goal} lbs</div>
             </div>
-
-            <div> 
+            <div className='p-mr-4 p-ml-4' style={{textAlign: "center"}}>
                 <h5>Starting Weight</h5>
-                <div>{starting} lbs </div>
-            </div> 
-
-            <div>
+                <div>{starting ? starting : 'N/A'} lbs </div>
+            </div>
+            <div className='p-mr-4 p-ml-4' style={{textAlign: "center"}}>
                 <h5>Current Weight</h5>
-                <div>{current} lbs </div>
-            </div> 
-
-            <div>
+                <div>{current ? current : 'N/A'} lbs </div>
+            </div>
+            <div className='p-mr-4 p-ml-4' style={{textAlign: "center"}}>
                 <h5>Total Weight Change</h5> 
-                <div>{starting - current} lbs </div>
+                <div>{starting && current ? starting - current : 'N/A'} lbs </div>
             </div>
-
-            <div>
+            <div className='p-mr-4 p-ml-4' style={{textAlign: "center"}}>
                 <h5>Weight Change Until Goal</h5>
-                <div>{current - goal} lbs</div>
+                <div>{current ? current - goal : 'N/A'} lbs</div>
             </div>
-
-
         </div>
     );
 };
+
 export default UserStats;
