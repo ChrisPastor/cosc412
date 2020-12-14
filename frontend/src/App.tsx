@@ -9,33 +9,11 @@ import 'primeflex/primeflex.css';
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from './auth/protected-route';
-import {User} from "../../backend/src/types/User";
-import {Game} from "../../backend/src/types/Game";
 import {observer} from "mobx-react";
 import {ProgressSpinner} from "primereact/progressspinner";
 import HomePage from './pages/HomePage/HomePage';
 import Donation from "./common/Donation";
 import SoloGamePage from "./pages/SoloGamePage/SoloGamePage";
-
-const fakeUser: User = {
-    bio: "this is a bio",
-    email: "someEmail",
-    friends: [],
-    games: [],
-    id: "agsdfkasdkj",
-    picture: "",
-    userName: "jdsfjdfa"
-};
-
-const fakeGame: Game = {
-    goal: 25,
-    id: "sadkhjfa",
-    metric: "weight",
-    name: "game1",
-    type: 'solo',
-    users: [],
-    completed: true,
-};
 
 const App: React.FunctionComponent = observer((): JSX.Element => {
     const { isLoading } = useAuth0();

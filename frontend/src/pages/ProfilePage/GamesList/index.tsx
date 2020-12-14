@@ -27,13 +27,13 @@ export const GamesList = (props: GamesListProps): JSX.Element => {
                                 <p className={'p-mr-2'}>{game.completed ? "Completed" : ""}</p>
                             </div>
                         </Button>
-                        <div style={{width: "20px"}}/>
-                        <Button onClick={() => handleAddMetric(true)}>
-                            <div className={"p-mr-2 p-d-flex"}>
-                                <i className={"pi pi-plus"}/>
-                                {`Add ${game.metric}`}
-                            </div>
-                        </Button>
+                        {/*<div style={{width: "20px"}}/>*/}
+                        {/*<Button onClick={() => handleAddMetric(true)}>*/}
+                        {/*    <div className={"p-mr-2 p-d-flex"}>*/}
+                        {/*        <i className={"pi pi-plus"}/>*/}
+                        {/*        {`Add ${game.metric}`}*/}
+                        {/*    </div>*/}
+                        {/*</Button>*/}
                     </div>
                 );
             })}
